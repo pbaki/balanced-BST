@@ -37,7 +37,7 @@ function inOrderTraversal(node, result) {
 function sortDupli(bst) {
   let result = [];
   inOrderTraversal(bst.root, result);
-  return result;
+  return new Tree(result);
 }
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -56,5 +56,4 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 let arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 let bst = new Tree(arr);
 let sortedBST = sortDupli(bst);
-console.log(sortedBST);
-prettyPrint(bst.root);
+prettyPrint(sortedBST.root);
