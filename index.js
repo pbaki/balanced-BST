@@ -124,6 +124,34 @@ function insert(value, node = bst.root) {
 
   return insert(value, currentDataNode);
 }
+function deleteNode(value, node = bst.root) {
+  if (node == null) {
+    return node;
+  }
+  if (value < node.data) {
+    node.left = deleteNode(value, node.left);
+  } else if (value > node.data) {
+    node.right = deleteNode(value, node.right);
+  } else {
+    if (node.right == null) {
+      return node.left;
+    } else if (node.left == null) {
+      return node.right;
+    }
+    node.data = minValue(node.right);
+    node.right = deleteNode(node.data, node.right);
+  }
+  return node;
+}
+
+function minValue(node) {
+  let minValue = node.data;
+  while (node.left !== null) {
+    minValue = node.left.data;
+    node = node.left;
+  }
+  return minValue;
+}
 
 let arr = [
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 6, 2, 7, 235, 7845, 1234,
@@ -135,4 +163,5 @@ bst = sortDupli(bst);
 //console.log(bst.root);
 //console.log(find(1));
 //insert(88);
+//deleteNode(9);
 prettyPrint(bst.root);
