@@ -104,6 +104,27 @@ function find(value, node = bst.root) {
   return find(value, currentDataNode);
 }
 
+function insert(value, node = bst.root) {
+  let currentDataNode;
+  if (node.data == value) {
+    return "Value exists";
+  }
+  if (value > node.data && node.right == null) {
+    node.right = new Node(value);
+    return node;
+  } else if (value < node.data && node.left == null) {
+    node.left = new Node(value);
+    return node;
+  }
+  if (value > node.data) {
+    currentDataNode = node.right;
+  } else if (value < node.data) {
+    currentDataNode = node.left;
+  }
+
+  return insert(value, currentDataNode);
+}
+
 let arr = [
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 6, 2, 7, 235, 7845, 1234,
   346, 856,
@@ -111,6 +132,7 @@ let arr = [
 let sortedArr = MergeSort(arr);
 let bst = new Tree(sortedArr);
 bst = sortDupli(bst);
-prettyPrint(bst.root);
 //console.log(bst.root);
-console.log(find(232323232));
+//console.log(find(1));
+//insert(88);
+prettyPrint(bst.root);
