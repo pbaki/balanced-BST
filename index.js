@@ -87,18 +87,19 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
-
 function find(value, node = bst.root) {
   let currentDataNode;
+  if (node === null) {
+    return "no such data";
+  }
   if (value == node.data) {
     return node;
   }
+
   if (value > node.data) {
     currentDataNode = node.right;
   } else if (value < node.data) {
     currentDataNode = node.left;
-  } else if (currentDataNode == null) {
-    return "no such data";
   }
   return find(value, currentDataNode);
 }
@@ -112,4 +113,4 @@ let bst = new Tree(sortedArr);
 bst = sortDupli(bst);
 prettyPrint(bst.root);
 //console.log(bst.root);
-console.log(find(2));
+console.log(find(232323232));
