@@ -88,11 +88,28 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
+function find(value, node = bst.root) {
+  let currentDataNode;
+  if (value == node.data) {
+    return node;
+  }
+  if (value > node.data) {
+    currentDataNode = node.right;
+  } else if (value < node.data) {
+    currentDataNode = node.left;
+  } else if (currentDataNode == null) {
+    return "no such data";
+  }
+  return find(value, currentDataNode);
+}
+
 let arr = [
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 6, 2, 7, 235, 7845, 1234,
   346, 856,
 ];
 let sortedArr = MergeSort(arr);
 let bst = new Tree(sortedArr);
-let sortedBST = sortDupli(bst);
-prettyPrint(sortedBST.root);
+bst = sortDupli(bst);
+prettyPrint(bst.root);
+//console.log(bst.root);
+console.log(find(2));
