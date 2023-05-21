@@ -220,6 +220,27 @@ function postorderHandler(node = bst.root) {
   console.log(result);
   return result;
 }
+function height(node = bst.root) {
+  if (node === null) {
+    return;
+  }
+  let counter1 = 0;
+  let counter2 = 0;
+  let tempnode = node;
+  while (tempnode != null) {
+    tempnode = tempnode.right;
+    counter1 += 1;
+  }
+  while (node != null) {
+    node = node.left;
+    counter2 += 1;
+  }
+  return counter1 > counter2
+    ? counter1
+    : counter2 > counter1
+    ? counter2
+    : counter1;
+}
 
 let arr = [
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 6, 2, 7, 235, 7845, 1234,
@@ -234,7 +255,8 @@ bst = sortDupli(bst);
 //deleteNode(9);
 //levelOrder();
 //console.log("breadth-first data in order: " + holder);
+// inorderHandler();
+// preorderHandler();
+// postorderHandler();
 prettyPrint(bst.root);
-inorderHandler();
-preorderHandler();
-postorderHandler();
+console.log(height());
