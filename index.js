@@ -177,6 +177,34 @@ function levelOrder(node = bst.root) {
     queue.shift();
   }
 }
+let inorderarr = [];
+let preorderarr = [];
+let postorderarr = [];
+
+function inorder(node = bst.root) {
+  if (node === null) {
+    return;
+  }
+  inorder(node.left);
+  inorderarr.push(node.data);
+  inorder(node.right);
+}
+function preorder(node = bst.root) {
+  if (node === null) {
+    return;
+  }
+  preorderarr.push(node.data);
+  preorder(node.left);
+  preorder(node.right);
+}
+function postorder(node = bst.root) {
+  if (node === null) {
+    return;
+  }
+  postorder(node.left);
+  postorder(node.right);
+  postorderarr.push(node.data);
+}
 
 let arr = [
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 6, 2, 7, 235, 7845, 1234,
@@ -192,3 +220,9 @@ bst = sortDupli(bst);
 //levelOrder();
 //console.log("breadth-first data in order: " + holder);
 prettyPrint(bst.root);
+inorder();
+preorder();
+postorder();
+console.log(inorderarr);
+console.log(preorderarr);
+console.log(postorderarr);
