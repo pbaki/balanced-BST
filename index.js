@@ -267,13 +267,33 @@ function depth(
   return "Not found";
 }
 
+function isBalanced(node = bst.root, counter = 0) {
+  if (node === null) {
+    return 0;
+  }
+
+  let leftHeight = isBalanced(node.left, counter + 1);
+  let rightHeight = isBalanced(node.right, counter + 1);
+  if (leftHeight === false || rightHeight === false) {
+    return false;
+  }
+  if (leftHeight - rightHeight > 1 || rightHeight - leftHeight > 1) {
+    return false;
+  }
+  return Math.max(leftHeight, rightHeight) + 1;
+}
+function rebalance(node = bst.root) {
+  let balancedTree = sortDupli(node);
+  return balancedTree;
+}
+
 let arr = [
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 6, 2, 7, 235, 7845, 1234,
   346, 856,
 ];
 let sortedArr = MergeSort(arr);
 let bst = new Tree(sortedArr);
-bst = sortDupli(bst);
+//bst = sortDupli(bst);
 //console.log(bst.root);
 //console.log(find(1));
 //insert(88);
@@ -284,5 +304,12 @@ bst = sortDupli(bst);
 // preorderHandler();
 // postorderHandler();
 //console.log(height());
+//console.log(depth());
+deleteNode(1);
+deleteNode(2);
+deleteNode(3);
+deleteNode(5);
+// console.log(isBalanced());
 prettyPrint(bst.root);
-console.log(depth());
+let rebalanced = rebalance(bst);
+prettyPrint(rebalanced.root);
