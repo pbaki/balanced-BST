@@ -177,33 +177,48 @@ function levelOrder(node = bst.root) {
     queue.shift();
   }
 }
-let inorderarr = [];
-let preorderarr = [];
-let postorderarr = [];
 
-function inorder(node = bst.root) {
+function inorder(node, result) {
   if (node === null) {
     return;
   }
-  inorder(node.left);
-  inorderarr.push(node.data);
-  inorder(node.right);
+  inorder(node.left, result);
+  result.push(node.data);
+  inorder(node.right, result);
 }
-function preorder(node = bst.root) {
+function preorder(node, result) {
   if (node === null) {
     return;
   }
-  preorderarr.push(node.data);
-  preorder(node.left);
-  preorder(node.right);
+  result.push(node.data);
+  preorder(node.left, result);
+  preorder(node.right, result);
 }
-function postorder(node = bst.root) {
+function postorder(node, result) {
   if (node === null) {
     return;
   }
-  postorder(node.left);
-  postorder(node.right);
-  postorderarr.push(node.data);
+  postorder(node.left, result);
+  postorder(node.right, result);
+  result.push(node.data);
+}
+function inorderHandler(node = bst.root) {
+  let result = [];
+  inorder(node, result);
+  console.log(result);
+  return result;
+}
+function preorderHandler(node = bst.root) {
+  let result = [];
+  preorder(node, result);
+  console.log(result);
+  return result;
+}
+function postorderHandler(node = bst.root) {
+  let result = [];
+  postorder(node, result);
+  console.log(result);
+  return result;
 }
 
 let arr = [
@@ -220,9 +235,6 @@ bst = sortDupli(bst);
 //levelOrder();
 //console.log("breadth-first data in order: " + holder);
 prettyPrint(bst.root);
-inorder();
-preorder();
-postorder();
-console.log(inorderarr);
-console.log(preorderarr);
-console.log(postorderarr);
+inorderHandler();
+preorderHandler();
+postorderHandler();
