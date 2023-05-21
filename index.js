@@ -205,19 +205,16 @@ function postorder(node, result) {
 function inorderHandler(node = bst.root) {
   let result = [];
   inorder(node, result);
-  console.log(result);
   return result;
 }
 function preorderHandler(node = bst.root) {
   let result = [];
   preorder(node, result);
-  console.log(result);
   return result;
 }
 function postorderHandler(node = bst.root) {
   let result = [];
   postorder(node, result);
-  console.log(result);
   return result;
 }
 function height(node = bst.root) {
@@ -287,12 +284,18 @@ function rebalance(node = bst.root) {
   return balancedTree;
 }
 
+function isBalancedString(Tree) {
+  if (isBalanced(Tree) === false) {
+    console.log("Tree not balanced");
+  } else {
+    console.log("Tree is Balanced");
+  }
+}
+
 let arr = [
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 6, 2, 7, 235, 7845, 1234,
   346, 856,
 ];
-let sortedArr = MergeSort(arr);
-let bst = new Tree(sortedArr);
 //bst = sortDupli(bst);
 //console.log(bst.root);
 //console.log(find(1));
@@ -305,11 +308,33 @@ let bst = new Tree(sortedArr);
 // postorderHandler();
 //console.log(height());
 //console.log(depth());
-deleteNode(1);
-deleteNode(2);
-deleteNode(3);
-deleteNode(5);
+// deleteNode(1);
+// deleteNode(2);
+// deleteNode(3);
+// deleteNode(5);
 // console.log(isBalanced());
-prettyPrint(bst.root);
-let rebalanced = rebalance(bst);
-prettyPrint(rebalanced.root);
+//prettyPrint(bst.root);
+
+function tieTogeter() {
+  let sortedArr = MergeSort(arr);
+  let bst = new Tree(sortedArr);
+  isBalancedString(bst.root);
+  console.log("preorder: " + preorderHandler(bst.root));
+  console.log("postorder: " + postorderHandler(bst.root));
+  console.log("inorder: " + inorderHandler(bst.root));
+  insert(101, bst.root);
+  insert(102, bst.root);
+  insert(103, bst.root);
+  insert(104, bst.root);
+  insert(105, bst.root);
+  insert(106, bst.root);
+  console.log("Inserted some numbers");
+  isBalancedString(bst.root);
+  let rebalanced = rebalance(bst);
+  console.log("rebalanced");
+  isBalancedString(rebalanced.root);
+  console.log("preorder: " + preorderHandler(bst.root));
+  console.log("postorder: " + postorderHandler(bst.root));
+  console.log("inorder: " + inorderHandler(bst.root));
+}
+tieTogeter();
