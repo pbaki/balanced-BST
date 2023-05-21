@@ -242,6 +242,31 @@ function height(node = bst.root) {
     : counter1;
 }
 
+function depth(
+  givenNode = bst.root.left.right.left,
+  rootNode = bst.root,
+  counter = 0
+) {
+  if (rootNode === null) {
+    return "Not found";
+  }
+  if (rootNode === givenNode) {
+    return counter;
+  }
+
+  let leftDepth = depth(givenNode, rootNode.left, counter + 1);
+  let rightDepth = depth(givenNode, rootNode.right, counter + 1);
+
+  if (leftDepth !== "Not found") {
+    return leftDepth;
+  }
+  if (rightDepth !== "Not found") {
+    return rightDepth;
+  }
+
+  return "Not found";
+}
+
 let arr = [
   1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324, 6, 2, 7, 235, 7845, 1234,
   346, 856,
@@ -258,5 +283,6 @@ bst = sortDupli(bst);
 // inorderHandler();
 // preorderHandler();
 // postorderHandler();
+//console.log(height());
 prettyPrint(bst.root);
-console.log(height());
+console.log(depth());
